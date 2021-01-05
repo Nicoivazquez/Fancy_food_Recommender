@@ -25,12 +25,14 @@ print(len(meta_df))
 
 ### remove rows with unformatted title 
 
-df3 = meta_df.fillna('')
-df5 = df3[~df3.title.str.contains('getTime')] # filter those unformatted rows
+meta_df = meta_df.fillna('') # or do I keep it na
+#df5 = df3[~df3.title.str.contains('getTime')] # filter those unformatted rows
 print(len(df5))
 
+meta_df = meta_df.drop(['tech1','fit','also_buy', 'image','tech2', 'also_view','similar_item','date',''])
 # gives you df with ['category', 'tech1', 'description', 'fit', 'title', 'also_buy', 'image',
 #        'tech2', 'brand', 'feature', 'rank', 'also_view', 'main_cat',
 #        'similar_item', 'date', 'price', 'asin', 'details'
 
 # 287051 products
+

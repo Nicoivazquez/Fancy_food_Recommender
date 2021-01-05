@@ -21,3 +21,10 @@ print(data[0])
 df = pd.DataFrame.from_dict(data)
 
 print(len(df))
+
+df_reviews = df.drop(['reviewTime','unixReviewTime','image','style'], axis=1)
+#df_reviews = df[df['vote'].fillna('0')] # the fill na does not work yet. but I want it to be 0 for no votes
+df_reviews['helpful_votes'] = df_reviews['vote']
+df_reviews['rating'] = df_reviews['overall']
+df_reviews['reviewTitle'] = df_reviews['summary']
+df_reviews = df_reviews.drop(['overall','summary','vote'],axis=1)
