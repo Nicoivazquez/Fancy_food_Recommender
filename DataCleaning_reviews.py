@@ -34,3 +34,7 @@ def data_clean(meta_gz):
 
                           # how to save a csv
 #imdb.to_csv('imdb_processed.csv', index=False)
+                          
+def lifestyle():
+    for 
+                          
