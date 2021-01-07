@@ -23,5 +23,6 @@ def data_clean(meta_gz):
     df_reviews['reviewTitle'] = df_reviews['summary']
     df_reviews = df_reviews.drop(['overall','summary','helpful'],axis=1)
     df_reviews = df_reviews.drop_duplicates(subset={"reviewerID","reviewerName","reviewText","reviewTitle"})
+    print('Done with loading meta5 data')
     return df_reviews
 

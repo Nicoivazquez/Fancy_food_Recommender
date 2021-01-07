@@ -1,8 +1,6 @@
 import os
 import json
 import gzip
-import pandas as pd
-
 import numpy as np
 import pandas as pd
 
@@ -24,11 +22,16 @@ stemmer_porter=PorterStemmer()
 s_words = set(stopwords.words('english'))
 punc = set(string.punctuation)
 
+def is_only_alpha(text):
+    return " ".join([word for word in text.split() if word.isalpha()])
+def stemmers(llst):
+    return [stemmer_porter.stem(words) for words in llst]
+
 ### load the meta data
 
 data = []
-def data_clean(meta_gz):
-    with gzip.open(meta_gz) as f:
+def data_clean(review_gz):
+    with gzip.open(review_gz) as f:
         for l in f:
             data.append(json.loads(l.strip()))
     # first row of the list
@@ -43,6 +46,7 @@ def data_clean(meta_gz):
     df_reviews['reviewTitle'] = df_reviews['summary']
     df_reviews = df_reviews.drop(['overall','summary','vote'],axis=1)
     df_reviews = df_reviews.drop_duplicates(subset={"reviewerID","reviewerName","reviewText","reviewTitle"})
+    print('Done with loading review datadata')
     return df_reviews
 
 
@@ -57,6 +61,7 @@ def all_text_processing(df):
     df['cleanText6'] = df['cleanText5'].apply(stemmers)
     df['reviewProcessed'] = df['cleanText6'].apply(lambda words: " ".join(words))
     df = df.drop(['cleanText1','cleanText2','cleanText3','cleanText4','cleanText5','cleanText6'],axis=1)
+    print('Done with processing review data')
     return df
 
 

@@ -33,10 +33,10 @@ def data_clean_meta(meta_gz):
             meta.append(json.loads(l.strip()))
 
     # total length of list, this number equals total number of products
-    print(len(meta))
+    print(len(meta), ' total length of list of products')
 
     # first row of the list
-    print(meta[0])
+    print(meta[0], "first row of meta data")
 
     # convert list into pandas dataframe
     meta_df = pd.DataFrame.from_dict(meta)
@@ -62,6 +62,7 @@ def data_clean_meta(meta_gz):
     meta_df['all_text'] = meta_df['all_text'] + ' ' + meta_df['categories']
     # filter all the home kitchen products away
     meta_df = meta_df[meta_df['main_category'] == 'Grocery']
+    print('Done with loading meta data')
     return meta_df
 
 def lifestylefilter(df_meta_life):
@@ -75,7 +76,7 @@ def lifestylefilter(df_meta_life):
     df_meta_life = df_meta_life.drop(['cleanText1','cleanText2','cleanText3','cleanText4','cleanText5','cleanText6'],axis=1)
     lifestyles = ['vegetarian?','paleo?','keto?', 'vegan?','lowsugar?',"low sugar",'gluten free', "gluten?",'low gluten',"pescaterian?",'low fat','fat free','free fat',"organic?", "gmo",'sugar?' ,'subsitutes?','indian?', "Kosher?", "halal?", 'Ovo lacto','lacto?']
     df_meta_life_filtered = df_meta_life[df_meta_life['lifestyle_processed'].str.contains('|'.join(lifestyles))]
-
+    print('Done with processing lifestylefilter on meta data')
     return df_meta_life_filtered
 
 

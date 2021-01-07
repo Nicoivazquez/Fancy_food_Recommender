@@ -80,8 +80,5 @@ if __name__ == "__main__":
     #load saved model in the future
     #saved_model = .pkl
     saved_model = text_to_vec(df_processed_reviews['reviewProcessed'])
-
-
     urls = input_to_pred(user_input, saved_model,df_processed_reviews)
-
     print(urls)
