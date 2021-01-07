@@ -11,6 +11,9 @@ from nltk import word_tokenize,sent_tokenize # tokenizing
 from nltk.stem import PorterStemmer,LancasterStemmer  # using the Porter Stemmer and Lancaster Stemmer and others
 from nltk.stem.snowball import SnowballStemmer
 from nltk.stem import WordNetLemmatizer  # lammatizer from WordNet
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
 
 stemmer_porter=PorterStemmer()
 s_words = set(stopwords.words('english'))
@@ -25,7 +28,7 @@ def stemmers(llst):
 
 meta = []
 def data_clean_meta(meta_gz):
-    with gzip.open('../meta_Grocery_and_Gourmet_Food.json.gz') as f:
+    with gzip.open(meta_gz) as f:
         for l in f:
             meta.append(json.loads(l.strip()))
 
