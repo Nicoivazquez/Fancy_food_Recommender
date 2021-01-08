@@ -69,14 +69,22 @@ def input_to_pred(user_input, saved_model,review_df):
 
 
 if __name__ == "__main__":
-    user_input = input('what is the userText')
+    user_input = str(input('what is the userText'))
     # import meta data and then filter them
-    df_start_meta = DataCleaning_meta.data_clean_meta("../meta_Grocery_and_Gourmet_Food.json.gz")
+    #df_start_meta = DataCleaning_meta.data_clean_meta("../meta_Grocery_and_Gourmet_Food.json.gz")
     # filter the lifestyle sections I want
-    df_lifestyle_meta = DataCleaning_meta.lifestylefilter(df_start_meta)
-    # bring in the reviews and select only the ones in the meta data
-    df_start_reviews = DataCleaning_reviews.data_clean('../Grocery_and_Gourmet_Food.json.gz')
-    df_processed_reviews = DataCleaning_reviews.all_text_processing(df_start_reviews)
+    #df_lifestyle_meta = DataCleaning_meta.lifestylefilter(df_start_meta)
+    #df_lifestyle_meta.to_json('df_lifestyle_meta.json')
+    df_lifestyle_meta = pd.read_json('../df_lifestyle_meta.json')
+    # bring in the reviews and process all the text for vecorizer
+    # df_start_reviews = DataCleaning_reviews.data_clean('../Grocery_and_Gourmet_Food.json.gz')
+    #select only the ones in the lifestyle meta data
+    # df_start_reviews = DataCleaning_reviews.lifestyle_filter(df_lifestyle_meta, df_start_reviews)
+    # df_processed_reviews = DataCleaning_reviews.all_text_processing(df_start_reviews)
+    # df_processed_reviews.to_json('df_processed_reviews.json')
+    # df_processed = pd.read_json('../df_processed_reviews_5.json')
+    df_processed_reviews = pd.read_json('../df_processed_filltered_reviews.json.json')
+    
     #load saved model in the future
     #saved_model = .pkl
     saved_model = text_to_vec(df_processed_reviews['reviewProcessed'])

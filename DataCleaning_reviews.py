@@ -27,7 +27,7 @@ def is_only_alpha(text):
 def stemmers(llst):
     return [stemmer_porter.stem(words) for words in llst]
 
-### load the meta data
+### load the review data
 
 data = []
 def data_clean(review_gz):
@@ -46,27 +46,37 @@ def data_clean(review_gz):
     df_reviews['reviewTitle'] = df_reviews['summary']
     df_reviews = df_reviews.drop(['overall','summary','vote'],axis=1)
     df_reviews = df_reviews.drop_duplicates(subset={"reviewerID","reviewerName","reviewText","reviewTitle"})
+    #del df_reviews[['reviewTime','unixReviewTime','image','style','overall','summary','vote']]
     print('Done with loading review datadata')
     return df_reviews
 
+def lifestyle_filter(df_meta, df_reviews):
+    m = df_reviews['asin'].isin(df_meta['asin'])
+    df_reviews = df_reviews[m]
+    print('Done with masking the reviews to the avalable products')
+    return df_review
 
 
 def all_text_processing(df):
-    df["all_text"] = df["reviewText"] + df["reviewTitle"]
-    df['cleanText1']= df['all_text'].apply(lambda words:" ".join([word for word in words.split() if word not in s_words]))
-    df['cleanText2'] = df['cleanText1'].apply(lambda words:" ".join(["".join([c if c not in punc else " " for c in word]) for word in words.split()]))
-    df['cleanText3'] = df['cleanText2'].apply(is_only_alpha)
-    df['cleanText4'] = df['cleanText3'].apply(word_tokenize)
-    df['cleanText5'] = df['cleanText4'].apply(lambda words: [word.lower() for word in words])
-    df['cleanText6'] = df['cleanText5'].apply(stemmers)
-    df['reviewProcessed'] = df['cleanText6'].apply(lambda words: " ".join(words))
-    df = df.drop(['cleanText1','cleanText2','cleanText3','cleanText4','cleanText5','cleanText6'],axis=1)
+    df["all_text"] = df["reviewText"] + ' ' + df["reviewTitle"]
+    df_start_reviews.dropna(subset=['all_text'], inplace=True)
+    df_start_reviews['all_text'] = df_start_reviews['all_text'].str.split()
+    df_start_reviews['clean_text1']= df_start_reviews['all_text'].apply(lambda words:" ".join([word for word in words if word not in s_words]))
+    df_start_reviews['cleanText2'] = df_start_reviews['clean_text1'].apply(lambda words:" ".join(["".join([c if c not in punc else " " for c in word]) for word in words.split()]))
+    df_start_reviews['cleanText3'] = df_start_reviews['cleanText2'].apply(is_only_alpha)
+    df_start_reviews['cleanText4'] = df_start_reviews['cleanText3'].apply(word_tokenize)
+    df_start_reviews['cleanText5'] = df_start_reviews['cleanText4'].apply(lambda words: [word.lower() for word in words])
+    df_start_reviews['cleanText6'] = df_start_reviews['cleanText5'].apply(stemmers)
+    df_start_reviews['reviewProcessed'] = df_start_reviews['cleanText6'].apply(lambda words: " ".join(words))
+    df_start_reviews = df_start_reviews.drop(['clean_text1','cleanText2','cleanText3','cleanText4','cleanText5','cleanText6'],axis=1)
+    #del df[['cleanText1','cleanText2','cleanText3','cleanText4','cleanText5','cleanText6']]
     print('Done with processing review data')
-    return df
+    return df_processed_reviews
+
 
 
 # how to save a csv
-#imdb.to_csv('imdb_processed.csv', index=False)
+#imdb.to_json('imdb_processed.json')
 
 
 
