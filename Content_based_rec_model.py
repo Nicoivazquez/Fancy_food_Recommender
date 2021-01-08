@@ -84,9 +84,10 @@ if __name__ == "__main__":
     # df_processed_reviews.to_json('df_processed_reviews.json')
     # df_processed = pd.read_json('../df_processed_reviews_5.json')
     df_processed_reviews = pd.read_json('../df_processed_filltered_reviews.json')
-    
+    #saved_model = text_to_vec(df_processed_reviews['reviewProcessed'])
     #load saved model in the future
-    #saved_model = .pkl
-    saved_model = text_to_vec(df_processed_reviews['reviewProcessed'])
+    
+    saved_model = mypklvec.pkl
+    
     urls = input_to_pred(user_input, saved_model,df_processed_reviews)
     print(urls)
