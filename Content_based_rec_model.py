@@ -83,7 +83,7 @@ if __name__ == "__main__":
     # df_processed_reviews = DataCleaning_reviews.all_text_processing(df_start_reviews)
     # df_processed_reviews.to_json('df_processed_reviews.json')
     # df_processed = pd.read_json('../df_processed_reviews_5.json')
-    df_processed_reviews = pd.read_json('../df_processed_filltered_reviews.json.json')
+    df_processed_reviews = pd.read_json('../df_processed_filltered_reviews.json')
     
     #load saved model in the future
     #saved_model = .pkl
