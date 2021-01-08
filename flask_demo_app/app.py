@@ -7,6 +7,29 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from io import BytesIO
 import base64
 import random
+import DataCleaning_meta_copy
+import DataCleaning_reviews_copy
+import Content_model_app
+
+# data visualisation and manipulation
+import numpy as np
+import pandas as pd
+import pickle
+#preprocessing
+import string 
+import nltk
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics import jaccard_score
+from sklearn.feature_extraction.text import CountVectorizer,TfidfVectorizer
+from nltk.corpus import stopwords  #stopwords
+from nltk import word_tokenize,sent_tokenize # tokenizing
+from nltk.stem import PorterStemmer,LancasterStemmer  # using the Porter Stemmer and Lancaster Stemmer and others
+from nltk.stem.snowball import SnowballStemmer
+from nltk.stem import WordNetLemmatizer  # lammatizer from WordNet
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
+
 
 app = Flask(__name__)
 
@@ -51,29 +74,37 @@ def predict():
 
 @app.route('/results', methods=['POST'])
 def results():
-    sepal_length = float(request.form['sepal_length'])
-    sepal_width = float(request.form['sepal_width'])
-    petal_length = float(request.form['petal_length'])
-    petal_width = float(request.form['petal_width'])
+    user_name = str(request.form['user_name'])
+    user_input = str(request.form['user_input'])
 
-    test_data = np.array([sepal_length, sepal_width, petal_length, petal_width]).reshape(1, -1)
 
-    # Load model
-    filename = 'iris_log_regr.pkl'
-    model = pickle.load(open(filename, 'rb'))
+        # import meta data and then filter them
+    #df_start_meta = DataCleaning_meta.data_clean_meta("../meta_Grocery_and_Gourmet_Food.json.gz")
+    # filter the lifestyle sections I want
+    #df_lifestyle_meta = DataCleaning_meta.lifestylefilter(df_start_meta)
+    #df_lifestyle_meta.to_json('df_lifestyle_meta.json')
+    ########df_lifestyle_meta = pd.read_json('../df_lifestyle_meta.json')
+    # bring in the reviews and process all the text for vecorizer
+    # df_start_reviews = DataCleaning_reviews.data_clean('../Grocery_and_Gourmet_Food.json.gz')
+    #select only the ones in the lifestyle meta data
+    # df_start_reviews = DataCleaning_reviews.lifestyle_filter(df_lifestyle_meta, df_start_reviews)
+    # df_processed_reviews = DataCleaning_reviews.all_text_processing(df_start_reviews)
+    # df_processed_reviews.to_json('df_processed_reviews.json')
+    # df_processed = pd.read_json('../df_processed_reviews_5.json')
+    df_processed_reviews = pd.read_json('../df_processed_filltered_reviews.json')
+    #saved_model = text_to_vec(df_processed_reviews['reviewProcessed'])
+    #load saved model in the future
 
-    # Predict on user input
-    prediction = model.predict(test_data)
+    model_path =  "../../mypkltrain.pkl"
+    vectorizer_path = "../../mypklvec.pkl"
 
-    # Load iris dataset to get target names
-    data = load_iris()
-    target_names = data.target_names
+    vectorizer = pickle.load(open(vectorizer_path,'rb'))
+    model = pickle.load(open(model_path,'rb'))
+    
+    urls = Content_model_app.input_to_pred(user_input, vectorizer ,model, df_processed_reviews) #
 
-    # Index target names at prediction value
-    for name in target_names[prediction]:
-        predicted_name = name
 
-    return render_template('results.html', prediction=predicted_name, image=f'./static/images/iris.png')
+    return render_template('results.html',name=user_name, prediction=urls, image=f'./static/images/iris.png')
 
 if __name__=="__main__":
     app.run(debug=True)
