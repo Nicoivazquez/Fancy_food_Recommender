@@ -103,8 +103,8 @@ def results():
     urls = Content_model_app.input_to_pred(user_input, vectorizer ,model, df_processed_reviews) #
     df_urls = pd.DataFrame(list(zip(urls[0],urls[1])), columns= ['Url', 'asin']).set_index('asin')
     # rememeber to pass the red_def from the function once you got the urls
-    df_lifestyle_meta = pd.read_json('./ziopDf/df_lifestyle_meta.json').set_index('asin')
-    df_to_show_products = pd.read_json('./ziopDf/df_to_show_products.json')
+    #df_lifestyle_meta = pd.read_json('./ziopDf/df_lifestyle_meta.json').set_index('asin')
+    df_to_show_products = pd.read_json('./ziopDf/df_to_show_products.json').set_index('asin')
     rec_df = df_urls.join(df_to_show_products)
 
     return render_template('results.html',name=user_name,tables=[rec_df.to_html(classes='rec_df',header='true')], titles = ['Recomender'] ,user_input=user_input)
@@ -130,5 +130,5 @@ if __name__=="__main__":
     model = pickle.load(open(model_path,'rb'))
 
 
-    app.run(debug=True, host='0.0.0.0', port=8105, threaded=True)
+    app.run(debug=True) #, host='0.0.0.0', port=8105, threaded=True)
     
