@@ -10,7 +10,7 @@ import random
 import DataCleaning_meta_copy
 import DataCleaning_reviews_copy
 import Content_model_app
-
+import os
 # data visualisation and manipulation
 import numpy as np
 import pandas as pd
@@ -78,6 +78,7 @@ def results():
     user_input = str(request.form['user_input'])
 
 
+
         # import meta data and then filter them
     #df_start_meta = DataCleaning_meta.data_clean_meta("../meta_Grocery_and_Gourmet_Food.json.gz")
     # filter the lifestyle sections I want
@@ -91,20 +92,43 @@ def results():
     # df_processed_reviews = DataCleaning_reviews.all_text_processing(df_start_reviews)
     # df_processed_reviews.to_json('df_processed_reviews.json')
     # df_processed = pd.read_json('../df_processed_reviews_5.json')
-    df_processed_reviews = pd.read_json('../df_processed_filltered_reviews.json')
+    df_processed_reviews = pd.read_json('df_processed_filltered_reviews.json')
     #saved_model = text_to_vec(df_processed_reviews['reviewProcessed'])
     #load saved model in the future
 
-    model_path =  "../../mypkltrain.pkl"
-    vectorizer_path = "../../mypklvec.pkl"
 
-    vectorizer = pickle.load(open(vectorizer_path,'rb'))
-    model = pickle.load(open(model_path,'rb'))
+
+
     
     urls = Content_model_app.input_to_pred(user_input, vectorizer ,model, df_processed_reviews) #
+    df_urls = pd.DataFrame({'url':urls[0], 'asin':urls[1]})
+    # rememeber to pass the red_def from the function once you got the urls
+    df_lifestyle_meta = pd.read_json('df_lifestyle_meta.json')
+    rec_df = pd.read_json('df_to_show_products.json')
+    rec_df = df_urls.join(df_lifestyle_meta,on='asin')
 
+    return render_template('results.html',name=user_name, red_df=rec_df, image=f'./static/images/iris.png')
 
-    return render_template('results.html',name=user_name, prediction=urls, image=f'./static/images/iris.png')
+@app.after_request
+def add_header(response):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response
+
 
 if __name__=="__main__":
+
+    pickle_vec =  "mypklvec.pkl"
+    pickle_model = "mypkltrain.pkl"
+    model_path =  pickle_model
+    vectorizer_path = pickle_vec
+    vectorizer = pickle.load(open(vectorizer_path,'rb'))
+    model = pickle.load(open(model_path,'rb'))
+
+
     app.run(debug=True)
+    

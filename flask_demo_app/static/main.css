@@ -1,8 +1,9 @@
+html,
 body {
   background: #fafafa;
   color: #333333;
   margin-top: 5rem;
-  background-image: url('https://images.squarespace-cdn.com/content/v1/53864e11e4b0e13cfb6c46c5/1570553417560-DO36LIIUX3JWMJVXV8EC/ke17ZwdGBToddI8pDm48kJUlZr2Ql5GtSKWrQpjur5t7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UfNdxJhjhuaNor070w_QAc94zjGLGXCa1tSmDVMXf8RUVhMJRmnnhuU1v2M8fLFyJw/Jute+XL+%26+Mini+REDONE.jpg?format=750w');
+  background-image: url('images/gorcerys.jpeg');
 }
 
 h1, h2, h3, h4, h5, h6 {

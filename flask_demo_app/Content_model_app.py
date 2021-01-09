@@ -104,4 +104,4 @@ def input_to_pred_jac(user_input, vecpkl,modelpkl, review_df):
     for asin in item_asin_top10:
         url = "http://www.amazon.com/dp/"+asin
         top10_url.append(url)
-    return top10_url
+    return top10_url, item_asin_top10
