@@ -92,7 +92,7 @@ def results():
     # df_processed_reviews = DataCleaning_reviews.all_text_processing(df_start_reviews)
     # df_processed_reviews.to_json('df_processed_reviews.json')
     # df_processed = pd.read_json('../df_processed_reviews_5.json')
-    df_processed_reviews = pd.read_json('df_processed_filltered_reviews.json')
+    df_processed_reviews = pd.read_json('./ziopDf/df_processed_filltered_reviews.json')
     #saved_model = text_to_vec(df_processed_reviews['reviewProcessed'])
     #load saved model in the future
 
@@ -101,13 +101,13 @@ def results():
 
     
     urls = Content_model_app.input_to_pred(user_input, vectorizer ,model, df_processed_reviews) #
-    df_urls = pd.DataFrame({'url':urls[0], 'asin':urls[1]})
+    df_urls = pd.DataFrame(list(zip(urls[0],urls[1])), columns= ['Url', 'asin']).set_index('asin')
     # rememeber to pass the red_def from the function once you got the urls
-    df_lifestyle_meta = pd.read_json('df_lifestyle_meta.json')
-    rec_df = pd.read_json('df_to_show_products.json')
-    rec_df = df_urls.join(df_lifestyle_meta,on='asin')
+    df_lifestyle_meta = pd.read_json('./ziopDf/df_lifestyle_meta.json').set_index('asin')
+    rec_df = pd.read_json('./ziopDf/df_to_show_products.json')
+    rec_df = df_urls.join(df_lifestyle_meta)
 
-    return render_template('results.html',name=user_name, red_df=rec_df, image=f'./static/images/iris.png', user_input=user_input)
+    return render_template('results.html',name=user_name, rec_df=rec_df, image=f'./static/images/iris.png', user_input=user_input)
 
 @app.after_request
 def add_header(response):
@@ -122,13 +122,13 @@ def add_header(response):
 
 if __name__=="__main__":
 
-    pickle_vec =  "mypklvec.pkl"
-    pickle_model = "mypkltrain.pkl"
+    pickle_vec =  "./ziopDf/mypklvec.pkl"
+    pickle_model = "./ziopDf/mypkltrain.pkl"
     model_path =  pickle_model
     vectorizer_path = pickle_vec
     vectorizer = pickle.load(open(vectorizer_path,'rb'))
     model = pickle.load(open(model_path,'rb'))
 
 
-    app.run(debug=True) #host='0.0.0.0', port=8105, threaded=True 
+    app.run(debug=True, host='0.0.0.0', port=8105, threaded=True)
     

@@ -32,7 +32,7 @@
   {% endfor %}
   </tr>
   {% for i, row in rec_df.iloc[1:].iterrows() %}
-  <tr class="{{row.Difficulty.lower().replace(' ','')}}">
+  <tr class="green">
     <td>{{i}}</td>
     {% for entry in row %}
     <td>{{ entry }}</td>
