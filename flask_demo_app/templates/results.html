@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
+
+
 <style>
   h1 {
   color: yellow;
@@ -12,14 +14,32 @@
   }
   </style>
 
-<h1>
-  Type of iris: {{prediction}}
-</h2>
+</style>
 
-<img src="{{ image }}"/>
+<h2 class='title'>Your Input</h2>
+<p> {{user_input}}
+ 
+</p> 
+<br>
 
-<form action="{{url_for('predict')}}">
-  <input type="submit" value="Predict again" />
-  </form>
+<h2 class='title'>Recommendations</h2>
+
+<table class='table'>
+  <tr>
+  <th>#</th>
+  {% for col in rec_df.columns %}
+  <th>{{col}}</th>
+  {% endfor %}
+  </tr>
+  {% for i, row in rec_df.iloc[1:].iterrows() %}
+  <tr class="{{row.Difficulty.lower().replace(' ','')}}">
+    <td>{{i}}</td>
+    {% for entry in row %}
+    <td>{{ entry }}</td>
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+
 {% endblock content %}
 

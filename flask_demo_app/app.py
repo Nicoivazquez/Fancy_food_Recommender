@@ -107,7 +107,7 @@ def results():
     rec_df = pd.read_json('df_to_show_products.json')
     rec_df = df_urls.join(df_lifestyle_meta,on='asin')
 
-    return render_template('results.html',name=user_name, red_df=rec_df, image=f'./static/images/iris.png')
+    return render_template('results.html',name=user_name, red_df=rec_df, image=f'./static/images/iris.png', user_input=user_input)
 
 @app.after_request
 def add_header(response):
@@ -130,5 +130,5 @@ if __name__=="__main__":
     model = pickle.load(open(model_path,'rb'))
 
 
-    app.run(debug=True)
+    app.run(debug=True) #host='0.0.0.0', port=8105, threaded=True 
     
