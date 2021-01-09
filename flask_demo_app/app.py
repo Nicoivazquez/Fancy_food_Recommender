@@ -72,7 +72,7 @@ def graphs():
 def predict():
     return render_template('predict.html')
 
-@app.route('/results', methods=['POST'])
+@app.route('/results', methods=['POST','GET'])
 def results():
     user_name = str(request.form['user_name'])
     user_input = str(request.form['user_input'])
@@ -104,10 +104,10 @@ def results():
     df_urls = pd.DataFrame(list(zip(urls[0],urls[1])), columns= ['Url', 'asin']).set_index('asin')
     # rememeber to pass the red_def from the function once you got the urls
     df_lifestyle_meta = pd.read_json('./ziopDf/df_lifestyle_meta.json').set_index('asin')
-    rec_df = pd.read_json('./ziopDf/df_to_show_products.json')
-    rec_df = df_urls.join(df_lifestyle_meta)
+    df_to_show_products = pd.read_json('./ziopDf/df_to_show_products.json')
+    rec_df = df_urls.join(df_to_show_products)
 
-    return render_template('results.html',name=user_name, rec_df=rec_df, image=f'./static/images/iris.png', user_input=user_input)
+    return render_template('results.html',name=user_name,tables=[rec_df.to_html(classes='rec_df',header='true')], titles = ['Recomender'] ,user_input=user_input)
 
 @app.after_request
 def add_header(response):

@@ -8,7 +8,7 @@
   text-align: center;
   }
   p {
-  color:white; 
+  color:red; 
   height:80;
   text-align: center;
   }
@@ -18,28 +18,18 @@
 
 <h2 class='title'>Your Input</h2>
 <p> {{user_input}}
- 
 </p> 
 <br>
 
 <h2 class='title'>Recommendations</h2>
 
-<table class='table'>
-  <tr>
-  <th>#</th>
-  {% for col in rec_df.columns %}
-  <th>{{col}}</th>
+<body>
+	 {% for table in tables %}
+    <h2>{{titles[loop.index]}}</h2>
+    {{ table|safe }}
   {% endfor %}
-  </tr>
-  {% for i, row in rec_df.iloc[1:].iterrows() %}
-  <tr class="green">
-    <td>{{i}}</td>
-    {% for entry in row %}
-    <td>{{ entry }}</td>
-    {% endfor %}
-  </tr>
-  {% endfor %}
-</table>
+
+</body>
 
 {% endblock content %}
 
