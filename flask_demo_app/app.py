@@ -107,7 +107,7 @@ def results():
     df_to_show_products = pd.read_json('./ziopDf/df_to_show_products.json').set_index('asin')
     rec_df = df_urls.join(df_to_show_products)
     your_list = "Your List"
-    return render_template('results.html',name=user_name, data=rec_df.to_html() ,user_input=user_input, name=your_list)
+    return render_template('results.html',name=user_name, data=rec_df.to_html() ,user_input=user_input)
 
 @app.after_request
 def add_header(response):
@@ -122,13 +122,13 @@ def add_header(response):
 
 if __name__=="__main__":
 
-    #pickle_vec =  "./ziopDf/mypklvec.pkl"
-    #pickle_model = "./ziopDf/mypkltrain.pkl"
-    # model_path =  pickle_model
-    # vectorizer_path = pickle_vec
-    # vectorizer = pickle.load(open(vectorizer_path,'rb'))
-    # model = pickle.load(open(model_path,'rb'))
+    pickle_vec =  "./ziopDf/mypklvec.pkl"
+    pickle_model = "./ziopDf/mypkltrain.pkl"
+    model_path =  pickle_model
+    vectorizer_path = pickle_vec
+    vectorizer = pickle.load(open(vectorizer_path,'rb'))
+    model = pickle.load(open(model_path,'rb'))
 
 
-    app.run(debug=True) #, host='0.0.0.0', port=8105, threaded=True)
+    app.run(debug=True, host='0.0.0.0', port=8105, threaded=True)
     
