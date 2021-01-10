@@ -43,7 +43,7 @@ def home(title=None):
 def about():
     return render_template("about.html")
 
-@app.route('/eda')
+@app.route('/eda', methods=['POST','GET'])
 def eda():
     column_options = [1, 2, 3, 4]
     return render_template("eda.html", column_options=column_options)
@@ -68,7 +68,7 @@ def graphs():
         image = pngImageB64String
         return render_template('graphs.html', col1=col1+1, col2=col2+1, url=f'./static/images/col{col1}col{col2}.png', image=image)
 
-@app.route('/predict')
+@app.route('/predict',methods=['POST','GET'])
 def predict():
     return render_template('predict.html')
 
@@ -122,12 +122,12 @@ def add_header(response):
 
 if __name__=="__main__":
 
-    pickle_vec =  "./ziopDf/mypklvec.pkl"
-    pickle_model = "./ziopDf/mypkltrain.pkl"
-    model_path =  pickle_model
-    vectorizer_path = pickle_vec
-    vectorizer = pickle.load(open(vectorizer_path,'rb'))
-    model = pickle.load(open(model_path,'rb'))
+    #pickle_vec =  "./ziopDf/mypklvec.pkl"
+    #pickle_model = "./ziopDf/mypkltrain.pkl"
+    # model_path =  pickle_model
+    # vectorizer_path = pickle_vec
+    # vectorizer = pickle.load(open(vectorizer_path,'rb'))
+    # model = pickle.load(open(model_path,'rb'))
 
 
     app.run(debug=True) #, host='0.0.0.0', port=8105, threaded=True)
