@@ -16,7 +16,7 @@
 
 </style>
 
-<h2 class='title'>Your Input</h2>
+<h2 class='title'>Your Input {{user_name}}:</h2>
 <p> {{user_input}}
 </p> 
 <br>
@@ -24,10 +24,8 @@
 <h2 class='title'>Recommendations</h2>
 
 <body>
-	 {% for table in tables %}
-    <h2>{{titles[loop.index]}}</h2>
-    {{ table|safe }}
-  {% endfor %}
+  <h1>{{name}}</h1>
+  {{data | safe}}
 
 </body>
 

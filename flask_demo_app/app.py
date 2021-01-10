@@ -106,8 +106,8 @@ def results():
     #df_lifestyle_meta = pd.read_json('./ziopDf/df_lifestyle_meta.json').set_index('asin')
     df_to_show_products = pd.read_json('./ziopDf/df_to_show_products.json').set_index('asin')
     rec_df = df_urls.join(df_to_show_products)
-
-    return render_template('results.html',name=user_name,tables=[rec_df.to_html(classes='rec_df',header='true')], titles = ['Recomender'] ,user_input=user_input)
+    your_list = "Your List"
+    return render_template('results.html',name=user_name, data=rec_df.to_html() ,user_input=user_input, name=your_list)
 
 @app.after_request
 def add_header(response):
