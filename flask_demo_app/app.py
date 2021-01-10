@@ -107,7 +107,7 @@ def results():
     df_to_show_products = pd.read_json('./ziopDf/df_to_show_products.json').set_index('asin')
     rec_df = df_urls.join(df_to_show_products)
     your_list = "Your List"
-    return render_template('results.html',name=user_name, data=rec_df.to_html(index=False, justify=center) ,user_input=user_input)
+    return render_template('results.html',name=user_name, data=rec_df.to_html(index=False, justify='center') ,user_input=user_input)
 
 @app.after_request
 def add_header(response):
