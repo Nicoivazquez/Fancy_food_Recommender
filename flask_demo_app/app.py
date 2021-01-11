@@ -107,6 +107,7 @@ def results():
     df_to_show_products = pd.read_json('./ziopDf/df_to_show_products.json')
     rec_df = df_urls.merge(df_to_show_products, on='asin', how='left')
     your_list = "Your List"
+    print(rec_df.head())
     return render_template('results.html',name=user_name, rec_df=rec_df,user_input=user_input)
 
 @app.after_request
