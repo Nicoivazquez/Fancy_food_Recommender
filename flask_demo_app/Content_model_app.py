@@ -98,7 +98,7 @@ def input_to_pred_jac(user_input, vecpkl,modelpkl, review_df):
         asin = review_df.iloc[sim_sorted[0][-counter]].loc['asin'] # works filtering backwards
         counter += 1
         if asin not in item_asin_top10:
-            item_asin_top10.append(asin)
+            item_asin_top10.append(str(asin))
         else: 
             continue
     for asin in item_asin_top10:
