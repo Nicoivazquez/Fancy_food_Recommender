@@ -100,13 +100,15 @@ def results():
 
 
     
-    urls = Content_model_app.input_to_pred(user_input, vectorizer ,model, df_processed_reviews) #
-    df_urls = pd.DataFrame(list(zip(urls[0],urls[1])), columns= ['Url', 'asin'])
+    urls,asins = Content_model_app.input_to_pred(user_input, vectorizer ,model, df_processed_reviews) #
+    df_urls = pd.DataFrame(list(zip(urls,asins)), columns= ['Url', 'asin'])
     # rememeber to pass the red_def from the function once you got the urls
     #df_lifestyle_meta = pd.read_json('./ziopDf/df_lifestyle_meta.json').set_index('asin')
     df_to_show_products = pd.read_json('./ziopDf/df_to_show_products.json')
     rec_df = df_urls.merge(df_to_show_products, on='asin', how='left')
     your_list = "Your List"
+    print(df_urls)
+    print(df_to_show_products.head())
     print(rec_df.head())
     return render_template('results.html',name=user_name, rec_df=rec_df,user_input=user_input)
 
