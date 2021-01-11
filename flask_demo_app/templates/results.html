@@ -57,16 +57,15 @@
   <tr class="green">
     <td>{{i}}</td>
     {% for entry in row %}
-    <td>{{ entry }}</td>
-    {% endfor %}
     <td>
-      <a href="{{url_for(entry)}}">{{entry}}</a>>
-      <div style="height:100%;width:100%">
-      hello world
-      </div>
-      </a>
-    </td> 
-  </tr>
+      {% if data.columns[loop.index0] in ['Url'] %}
+                <a href="{{ url_for(entry) }}">{{ entry }}</a>
+            {% else %}
+    {{ entry }}
+    {%endif%}
+  </td>
+    {% endfor %}
+  </tr>>
   {% endfor %}
 </table>
 {% endblock content %}
