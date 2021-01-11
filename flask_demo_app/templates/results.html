@@ -13,7 +13,7 @@
   justify-content: center;
   
   }
-  @media only screen and (max-width: 1000px) {
+  @media only screen and (max-width: 80%) {
       .table {
           text-align: center;
           display: flex;
@@ -59,6 +59,13 @@
     {% for entry in row %}
     <td>{{ entry }}</td>
     {% endfor %}
+    <td>
+      <a href="{{url_for(entry)}}">{{entry}}</a>>
+      <div style="height:100%;width:100%">
+      hello world
+      </div>
+      </a>
+    </td> 
   </tr>
   {% endfor %}
 </table>
