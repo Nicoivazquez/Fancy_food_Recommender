@@ -106,6 +106,7 @@ def results():
     #df_lifestyle_meta = pd.read_json('./ziopDf/df_lifestyle_meta.json').set_index('asin')
     df_to_show_products = pd.read_json('./ziopDf/df_to_show_products.json')
     rec_df = df_urls.merge(df_to_show_products, on='asin', how='left')
+    rec_df = rec_df[['name', 'Url']]
     your_list = "Your List"
     print(df_urls)
     print(df_to_show_products.head())
