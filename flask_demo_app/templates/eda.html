@@ -1,18 +1,83 @@
 {% extends "base.html" %}
 {% block content %}
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
-  <form method="POST" action="/">
-      Checkbox 1<input type="checkbox" value="1" name="mycheckbox">
-      Checkbox 2<input type="checkbox" value="2" name="mycheckbox">
-      Checkbox 3<input type="checkbox" value="3" name="mycheckbox">
-      <input type="submit">
-  </form>
-</body>
 
-{% endblock content %}
+<style>
+.green {background-color:rgba(0, 255, 0, .3);}
+.blue {background-color:rgba(0, 0, 255, .3);}
+.black {background-color:rgba(0, 0, 0, .3);}
+.bb {color: rgba(255, 255, 255, 1); background-color:rgba(0, 0, 0, .6);}
+.white {background-color:rgba(255, 255, 255,1);}
+.main {
+  background-color: rgba(255, 255, 255, 0.7);
+  margin-top: 50px;
+}
+.move-button {
+  display: flex;
+  justify-content: center;
+}
+body {
+  background-image: url('https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/an-alpine-ski-trail-on-wildcat-mountain-tim-laman.jpg');
+  background-size: 100%
+}
+@media only screen and (max-width: 600px) {
+    body {
+        background-size: auto;
+    }
+}
+
+button {
+            padding: 1vh 2vw;
+            background-color: cornflowerblue;
+            color: white;
+            border-radius: 16px; 
+            border-color:white;
+            padding-left: 12px; 
+            padding-right: 12px; 
+            font-size: 16px; 
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: rgba(0,0,0,0);
+            color: cornflowerblue;
+            border-color: cornflowerblue;
+            border: 2px solid cornflowerblue;
+        }
+</style>
+
+
+<div class="main" style="padding: 20px 25% 20px 25%;">
+
+  <h2><b>Get recommendations of trails to ski based on a trail you know like:</b></h2>
+
+<br>
+
+<form action='/recommendations', method='POST'>
+  <div><h3><b>Step 1: Choose a Lifestyle:</b></h3></div>
+
+<h6>
+  <b><i>***Keep an open mind! Trails of the difficulty higher or lower than you typically ski can be just as doable and fun!***</i></b>
+</h6>
+<form action='/recommendations', method='GET'>
+  <input type="checkbox" name="green" value="green"> <b>Vegan</b><br>
+  <input type="checkbox" name="blue" value="blue"> <b>Gluten free</b><br>
+  <input type="checkbox" name="black" value="black"> <b>Low sugar</b><br>
+  <input type="checkbox" name="bb" value="bb"> <b>green</b><br>
+
+  <form action='/results' method = 'post'>
+
+
+    <div class = 'main', style="padding: 20px 25% 20px 25%;">
+      <label for='sl'>product you want Alternative:</label >
+      <input type='text' name = 'alt_name' id='sl'/>
+
+</div>
+<br>
+  <div class='move-button'>
+    
+  <button type="submit">Recommend</button>
+
+</div>
+
+
+{% endblock %}
