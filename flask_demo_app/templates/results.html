@@ -59,7 +59,7 @@
     {% for entry in row %}
     <td>
       {% if rec_df.columns[loop.index0] in ['Url'] %}
-                <a href="{{ url_for(entry) }}">{{ entry }}</a>
+                <a href="{{entry}}">{{ entry }}</a>
             {% else %}
     {{ entry }}
     {%endif%}
@@ -69,4 +69,3 @@
   {% endfor %}
 </table>
 {% endblock content %}
-
