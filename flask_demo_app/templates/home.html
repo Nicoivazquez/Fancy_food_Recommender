@@ -1,11 +1,22 @@
-
-{% extends "layout.html" %}
+{% extends "base.html" %}
 {% block content %}
 
 <style>
 
-body{
-     
+
+
+/*body {
+  background-image: url('https://miro.medium.com/max/3200/1*RtC3toiFps5fzTbkAJulaw.jpeg');
+  background-size: 100%;
+}*/
+
+
+
+   body{
+     background-image:url('https://miro.medium.com/max/9792/0*6QW9G6q0pNSTz6AR');
+     width:100%;
+
+    background-size: cover;
    }
 
    @media only screen and (max-width: 600px) {
@@ -13,64 +24,75 @@ body{
            background-size: auto;
        }
    }
-  
-  
-  .main {
-    background-color: rgba(255, 255, 255, 0);
-    margin-top: 100px;
-    padding-bottom: 50px;
-  }
-  .main h1 {
-    font-size: 5em;
-  }
-  .main h2 {
-    font-size:3em;
-  }
-  .main p {
-    font-size:2em;
-  }
-  .buttons {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-  }
-  
-  
-  
-  
-  
-  button {
-              padding: 1vh 2vw;
-              background-color: rgb(218, 52, 52);
-              color: white;
-              border-radius: 16px;
-              border-color: white; 
-              padding-left: 12px; 
-              padding-right: 12px; 
-              font-size: 16px; 
-              font-weight: bold;
-          }
-  
-          button:hover {
-              background-color: rgba(0,0,0,0);
-              color: cornflowerblue;
-              border-color: cornflowerblue;
-  
-          }
-  
-  
-  </style>
-  
-  
 
-  
-  
-  
-  
-      <div class="main">
-  
-        <div class="transparent-bg">
-          <h1>Lifestyle Grocery-list Recommender</h1>
+
+
+.main {
+  background-color: rgba(255, 255, 255, 0.5);
+  margin-top: 100px;
+  padding-bottom: 50px;
+}
+.main h1 {
+  font-size: 5em;
+}
+.main h2 {
+  font-size:3em;
+}
+.main p {
+  font-size:2em;
+}
+.buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+
+
+
+
+button {
+            padding: 1vh 2vw;
+            background-color: cornflowerblue;
+            color: white;
+            border-radius: 16px;
+            border-color: white; 
+            padding-left: 12px; 
+            padding-right: 12px; 
+            font-size: 16px; 
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: rgba(0,0,0,0);
+            color: cornflowerblue;
+            border-color: cornflowerblue;
+
+        }
+
+
+</style>
+
+
+
+
+
+<div class="overlay">
+
+</div>
+
+
+
+
+
+
+
+
+
+    <div class="main">
+
+      <div class="starter-template">
+        <h1>Lifestyle Grocery-list Recommender</h1>
           <h2>Find new and exciting products that suit your lifestyle </h2>
         </div>
   
@@ -81,11 +103,11 @@ body{
   
         <form action='/eda', method='POST'>
           <button type="submit" >Alternatives to Products you already love</button>
-        </form>
-      </div>
-  
-  
-      </div>
-  
+      </form>
+    </div>
 
-{% endblock content %}
+
+    </div>
+
+
+{% endblock %}
