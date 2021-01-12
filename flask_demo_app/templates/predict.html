@@ -1,5 +1,52 @@
 {% extends "base.html" %}
 {% block content %}
+
+
+
+<style>
+  .green {background-color:rgba(0, 255, 0, .3);}
+  .blue {background-color:rgba(0, 0, 255, .3);}
+  .black {background-color:rgba(0, 0, 0, .3);}
+  .bb {color: rgba(255, 255, 255, 1); background-color:rgba(0, 0, 0, .6);}
+  .white {background-color:rgba(255, 255, 255,1);}
+  .main {
+    background-color: rgba(255, 255, 255, 0.7);
+    margin-top: 50px;
+  }
+  .move-button {
+    display: flex;
+    justify-content: center;
+  }
+  body {
+    background-image: url('https://miro.medium.com/max/3200/1*RtC3toiFps5fzTbkAJulaw.jpeg');
+    background-size: 100%
+  }
+  @media only screen and (max-width: 600px) {
+      body {
+          background-size: auto;
+      }
+  }
+  
+  button {
+              padding: 1vh 2vw;
+              background-color: cornflowerblue;
+              color: white;
+              border-radius: 16px; 
+              border-color:white;
+              padding-left: 12px; 
+              padding-right: 12px; 
+              font-size: 16px; 
+              font-weight: bold;
+          }
+  
+          button:hover {
+              background-color: rgba(0,0,0,0);
+              color: cornflowerblue;
+              border-color: cornflowerblue;
+              border: 2px solid cornflowerblue;
+          }
+  </style>
+  
 <form action='/results' method = 'post'>
 
 
