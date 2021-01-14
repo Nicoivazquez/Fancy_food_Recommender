@@ -16,33 +16,33 @@ There are 5,074,160 reviews of 287,209 products under the Amazon grocery and gou
 
 Review data set columns before clean up:
 
-reviewerID - ID of the reviewer, e.g. A2SUAM1J3GNN3B
-asin - ID of the product, e.g. 0000013714
-reviewerName - name of the reviewer
-vote - helpful votes of the review
-style - a dictionary of the product metadata, e.g., "Format" is "Hardcover"
-reviewText - text of the review
-overall - rating of the product
-summary - summary of the review
-unixReviewTime - time of the review (unix time)
-reviewTime - time of the review (raw)
-image - images that users post after they have received the product
+  reviewerID - ID of the reviewer, e.g. A2SUAM1J3GNN3B
+  asin - ID of the product, e.g. 0000013714
+  reviewerName - name of the reviewer
+  vote - helpful votes of the review
+  style - a dictionary of the product metadata, e.g., "Format" is "Hardcover"
+  reviewText - text of the review
+  overall - rating of the product
+  summary - summary of the review
+  unixReviewTime - time of the review (unix time)
+  reviewTime - time of the review (raw)
+  image - images that users post after they have received the product
 
 Metadata data set columns before clean up:
 
-asin - ID of the product, e.g. 0000031852
-title - name of the product
-feature - bullet-point format features of the product
-description - description of the product
-price - price in US dollars (at time of crawl)
-image - url of the product image
-related - related products (also bought, also viewed, bought together, buy after viewing)
-salesRank - sales rank information
-brand - brand name
-categories - list of categories the product belongs to
-tech1 - the first technical detail table of the product
-tech2 - the second technical detail table of the product
-similar - similar product tab
+  asin - ID of the product, e.g. 0000031852
+  title - name of the product
+  feature - bullet-point format features of the product
+  description - description of the product
+  price - price in US dollars (at time of crawl)
+  image - url of the product image
+  related - related products (also bought, also viewed, bought together, buy after viewing)
+  salesRank - sales rank information
+  brand - brand name
+  categories - list of categories the product belongs to
+  tech1 - the first technical detail table of the product
+  tech2 - the second technical detail table of the product
+  similar - similar product tab
 
 ![images/Untitled.png](images/Untitled.png)
 
@@ -50,26 +50,26 @@ After doing some initial cleaning of the data frame I ended up with two separate
 
 End results in review data set columns are:
 
-reviewerID - ID of the reviewer, e.g. A2SUAM1J3GNN3B
-asin - ID of the product, e.g. 0000013714
-reviewerName - name of the reviewer
-helpful_vote- helpful votes of the review
-reviewText - text of the review
-rating- rating of the product
-review_summary - summary of the review
+  reviewerID - ID of the reviewer, e.g. A2SUAM1J3GNN3B
+  asin - ID of the product, e.g. 0000013714
+  reviewerName - name of the reviewer
+  helpful_vote- helpful votes of the review
+  reviewText - text of the review
+  rating- rating of the product
+  review_summary - summary of the review
 
 After dropping duplicates I ended up with unique 4,678,158 ratings. 
 
 And for the metadata table the resulting columns are: 
 
-asin - ID of the product, e.g. 0000031852
-name - name of the product
-features - bullet-point format features of the product
-description - description of the product
-price - price in US dollars (at time of crawl)
-brand - brand name
-categories - list of categories the product belongs to
-main_catagory - larger classifier of Amazon most common two are 'Amazon home'  or "grocery"
+  asin - ID of the product, e.g. 0000031852
+  name - name of the product
+  features - bullet-point format features of the product
+  description - description of the product
+  price - price in US dollars (at time of crawl)
+  brand - brand name
+  categories - list of categories the product belongs to
+  main_catagory - larger classifier of Amazon most common two are 'Amazon home' or "grocery"
 
 # EDA
 
