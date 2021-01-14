@@ -189,6 +189,6 @@ An this is what the recommendation would look like. I would have the input the u
 
 # Thanks!
 
-![images/Untitled%208.png](images/Untitled%208.png)
+![images/Untitled%2011.png](images/Untitled%2011.png)
 
 “The biggest mistake people make in life is not trying to make a living at doing what they most enjoy.” Malcolm Forbes
